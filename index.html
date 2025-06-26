@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabores de la Mina - Restaurante Temático en Huanuni</title>
+    <style>
+        :root {
+            --color-mina: #333333;
+            --color-oro: #FFD700;
+            --color-dinamita: #CC0000;
+            --color-tierra: #8B4513;
+            --color-texto: #f5f5f5;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--color-texto);
+            background-color: var(--color-mina);
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Rockwell', serif;
+            color: var(--color-oro);
+        }
+        
+        header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('mineros-trabajando.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+        
+        .hero-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-text p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            max-width: 800px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--color-dinamita);
+            color: white;
+            padding: 12px 30px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: var(--color-oro);
+            color: var(--color-mina);
+            transform: scale(1.05);
+        }
+        
+        nav {
+            background-color: var(--color-mina);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid var(--color-oro);
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 20px;
+            margin: 0;
+            flex-wrap: wrap;
+        }
+        
+        nav ul li {
+            margin: 0 15px;
+        }
+        
+        nav ul li a {
+            color: var(--color-texto);
+            text-decoration: none;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            background-color: var(--color-oro);
+            color: var(--color-mina);
+        }
+        
+        section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: var(--color-dinamita);
+            margin: 20px auto;
+        }
+        
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            border: 3px solid var(--color-oro);
+        }
+        
+        .menu-categories {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+        
+        .menu-category {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            border: 1px solid var(--color-oro);
+        }
+        
+        .menu-category h3 {
+            color: var(--color-dinamita);
+            text-align: center;
+            border-bottom: 1px dashed var(--color-oro);
+            padding-bottom: 10px;
+        }
+        
+        .menu-item {
+            margin: 20px 0;
+        }
+        
+        .menu-item h4 {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        
+        .menu-item p {
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+        
+        .price {
+            color: var(--color-oro);
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            height: 250px;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+        
+        .testimonials {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+        
+        .testimonial {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            position: relative;
+            border: 1px solid var(--color-oro);
+        }
+        
+        .testimonial:before {
+            content: """;
+            font-size: 60px;
+            color: var(--color-oro);
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            opacity: 0.3;
+        }
+        
+        .testimonial-author {
+            text-align: right;
+            font-style: italic;
+            color: var(--color-oro);
+            margin-top: 15px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+        }
+        
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--color-oro);
+            color: white;
+        }
+        
+        .contact-form button {
+            background: var(--color-dinamita);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .contact-form button:hover {
+            background: var(--color-oro);
+            color: var(--color-mina);
+        }
+        
+        .contact-details {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .contact-details p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .contact-details i {
+            margin-right: 10px;
+            color: var(--color-oro);
+            width: 20px;
+            text-align: center;
+        }
+        
+        footer {
+            background-color: #222;
+            text-align: center;
+            padding: 30px;
+            border-top: 2px solid var(--color-oro);
+        }
+        
+        .social-links {
+            margin: 20px 0;
+        }
+        
+        .social-links a {
+            color: var(--color-texto);
+            margin: 0 10px;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--color-oro);
+        }
+        
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-text p {
+                font-size: 1.2rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 5px 0;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Rockwell&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header id="inicio">
+        <div class="hero-text">
+            <h1>Sabores de la Mina</h1>
+            <p>Vive una experiencia gastronómica única inspirada en la tradición minera de Huanuni</p>
+            <div class="hero-buttons">
+                <a href="#reservas" class="btn">Reserva tu mesa</a>
+                <a href="#menu" class="btn">Ver nuestro menú</a>
+            </div>
+        </div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#nosotros">Nosotros</a></li>
+            <li><a href="#menu">Menú</a></li>
+            <li><a href="#experiencia">Experiencia</a></li>
+            <li><a href="#galeria">Galería</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+    
+    <section id="nosotros">
+        <h2 class="section-title">Sobre Nosotros</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>En el corazón de Huanuni, donde la tierra guarda historias de esfuerzo y tradición, nace "Sabores de la Mina", un restaurante temático que rinde homenaje a la cultura minera a través de la gastronomía andina.</p>
+                <p>Nuestro proyecto fusiona los sabores ancestrales de los Andes con la narrativa profunda de la minería boliviana, creando una experiencia multisensorial única en la región.</p>
+                <p>Cada plato, cada detalle de nuestra ambientación y cada historia que compartimos busca conectar a nuestros comensales con el alma de Huanuni y su gente.</p>
+            </div>
+            <div class="about-image">
+                <img src="interior-restaurante.jpg" alt="Interior del restaurante Sabores de la Mina">
+            </div>
+        </div>
+    </section>
+    
+    <section id="menu">
+        <h2 class="section-title">Nuestro Menú</h2>
+        <div class="menu-categories">
+            <div class="menu-category">
+                <h3>Menú Tradicional-Minero</h3>
+                <div class="menu-item">
+                    <h4>Pique Minero <span class="price">Bs. 40</span></h4>
+                    <p>Variante del pique macho con charque de llama, papas andinas y ají local</p>
+                </div>
+                <div class="menu-item">
+                    <h4>Caldo de Piedra <span class="price">Bs. 25</span></h4>
+                    <p>Sopa de quinua con papas y queso cocida con piedra caliente al estilo minero</p>
+                </div>
+                <div class="menu-item">
+                    <h4>Plato del Minero <span class="price">Bs. 35</span></h4>
+                    <p>Carne de res, arroz, papa y chuño con salsa especial</p>
+                </div>
+            </div>
+            
+            <div class="menu-category">
+                <h3>Fusión Andina Gourmet</h3>
+                <div class="menu-item">
+                    <h4>Llamerías de la Mina <span class="price">Bs. 55</span></h4>
+                    <p>Lomo de llama en salsa de vino con quinua real y vegetales andinos</p>
+                </div>
+                <div class="menu-item">
+                    <h4>Ocas Doradas <span class="price">Bs. 50</span></h4>
+                    <p>Ocas glaseadas con miel de caña, acompañadas de puré de papalisa</p>
+                </div>
+                <div class="menu-item">
+                    <h4>Quinua del Tío <span class="price">Bs. 45</span></h4>
+                    <p>Quinua roja con hongos silvestres y hierbas andinas</p>
+                </div>
+            </div>
+            
+            <div class="menu-category">
+                <h3>Menú Degustación Temática</h3>
+                <div class="menu-item">
+                    <h4>Experiencia Minera Completa <span class="price">Bs. 120</span></h4>
+                    <p>Entrada, plato fuerte, postre y bebida con relato histórico minero</p>
+                </div>
+                <div class="menu-item">
+                    <h4>Ruta de los Sabores <span class="price">Bs. 90</span></h4>
+                    <p>Degustación de 5 platos pequeños que representan la cultura minera</p>
+                </div>
+                <div class="menu-item">
+                    <h4>Cena Romántica en la Mina <span class="price">Bs. 150</span></h4>
+                    <p>Menú especial para parejas en nuestro rincón más íntimo</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="experiencia">
+        <h2 class="section-title">La Experiencia</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 40px;">En "Sabores de la Mina" no solo servimos comida, creamos momentos inolvidables que conectan a nuestros comensales con la esencia de Huanuni y su tradición minera.</p>
+        
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Ambientación Única</h3>
+                <p>Nuestro local está diseñado para transportarte al interior de una mina auténtica. Pasillos que simulan túneles, iluminación con lámparas de casco minero, herramientas antiguas y decoración que narra la historia de los mineros de Huanuni.</p>
+                
+                <h3>Sonidos y Relatos</h3>
+                <p>La experiencia auditiva incluye sonidos reales de la mina, música andina-minera y relatos históricos que acompañan algunos de nuestros platos especiales.</p>
+                
+                <h3>Personal Caracterizado</h3>
+                <p>Nuestro equipo viste uniformes inspirados en la vestimenta tradicional de los mineros, adaptados para el servicio gastronómico, creando una atmósfera auténtica pero cómoda.</p>
+            </div>
+            <div class="about-image">
+                <img src="experiencia-restaurante.jpg" alt="Experiencia en Sabores de la Mina">
+            </div>
+        </div>
+        
+        <h3 style="text-align: center; margin-top: 50px;">Testimonios</h3>
+        <div class="testimonials">
+            <div class="testimonial">
+                <p>"Increíble experiencia! La combinación de sabores andinos con la ambientación minera es única. El Pique Minero es para volver una y otra vez."</p>
+                <p class="testimonial-author">- Juan Pérez, Turista de La Paz</p>
+            </div>
+            <div class="testimonial">
+                <p>"Como hijo de minero, este restaurante me emocionó. Comer aquí es recordar la historia de mi padre y de todos los que trabajan bajo tierra."</p>
+                <p class="testimonial-author">- Carlos M., Huanuni</p>
+            </div>
+            <div class="testimonial">
+                <p>"La atención es excelente y cada detalle está pensado. Llevé a mi familia y todos quedaron encantados con la experiencia completa."</p>
+                <p class="testimonial-author">- María G., Oruro</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="galeria">
+        <h2 class="section-title">Galería</h2>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="plato-pique-minero.jpg" alt="Pique Minero">
+                <div class="gallery-caption">Pique Minero - Nuestro plato estrella</div>
+            </div>
+            <div class="gallery-item">
+                <img src="interior-restaurante-2.jpg" alt="Interior del restaurante">
+                <div class="gallery-caption">Ambientación única tipo mina</div>
+            </div>
+            <div class="gallery-item">
+                <img src="equipo-restaurante.jpg" alt="Equipo de Sabores de la Mina">
+                <div class="gallery-caption">Nuestro equipo caracterizado</div>
+            </div>
+            <div class="gallery-item">
+                <img src="postre-tipico.jpg" alt="Postre tradicional">
+                <div class="gallery-caption">Dulce de Huanuni - Postre tradicional</div>
+            </div>
+            <div class="gallery-item">
+                <img src="evento-especial.jpg" alt="Evento especial">
+                <div class="gallery-caption">Celebración de aniversario minero</div>
+            </div>
+            <div class="gallery-item">
+                <img src="ingredientes-locales.jpg" alt="Ingredientes locales">
+                <div class="gallery-caption">Ingredientes andinos frescos</div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contacto">
+        <h2 class="section-title">Contacto</h2>
+        <div class="contact-info">
+            <div class="contact-form">
+                <h3>Reservas y Consultas</h3>
+                <form>
+                    <input type="text" placeholder="Nombre completo" required>
+                    <input type="email" placeholder="Correo electrónico" required>
+                    <input type="tel" placeholder="Teléfono/Celular">
+                    <textarea placeholder="Tu mensaje o reserva" rows="5" required></textarea>
+                    <button type="submit">Enviar Mensaje</button>
+                </form>
+            </div>
+            <div class="contact-details">
+                <h3>Información</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Plaza Principal 10 de Febrero, Huanuni, Oruro - Bolivia</p>
+                <p><i class="fas fa-phone"></i> +591 12345678</p>
+                <p><i class="fas fa-envelope"></i> info@saboresdelamina.com</p>
+                <p><i class="fas fa-clock"></i> Lunes a Viernes: 11:00 - 22:00<br>Sábados y Domingos: 10:00 - 23:00</p>
+                <p><i class="fas fa-bus"></i> A 45 minutos de la ciudad de Oruro</p>
+                
+                <h3 style="margin-top: 30px;">Síguenos</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+           
